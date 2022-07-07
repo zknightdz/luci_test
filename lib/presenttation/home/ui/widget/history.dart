@@ -215,7 +215,7 @@ class _HistoryState extends State<History> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
-            action.time,
+            action.content,
             style: const TextStyle(
               fontSize: 16,
               color: Colors.black87,

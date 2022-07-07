@@ -45,15 +45,15 @@ var history = [
     title: 'Hôm nay, 07/07/2022',
     actions: [
       Action(
-        time: '16:30:24 07/07/2022',
+        time: '16:30:24, 07/07/2022',
         content: 'Chỉnh sửa thông tin bất động sản',
       ),
       Action(
-        time: '15:45:06 07/07/2022',
+        time: '15:45:06, 07/07/2022',
         content: 'Chỉnh sửa thông tin bất động sản',
       ),
       Action(
-        time: '08:13:04 07/07/2022',
+        time: '08:13:04, 07/07/2022',
         content: 'Thêm mới bất động sản',
       ),
     ],
@@ -62,11 +62,11 @@ var history = [
     title: 'Hôm qua, 06/07/2022',
     actions: [
       Action(
-        time: '23:45:09 06/07/2022',
+        time: '23:45:09, 06/07/2022',
         content: 'Chỉnh sửa thông tin bất động sản',
       ),
       Action(
-        time: '11:11:11 06/07/2022',
+        time: '11:11:11, 06/07/2022',
         content: 'Thêm mới bất động sản',
       ),
     ],
@@ -75,11 +75,11 @@ var history = [
     title: '05/07/2022',
     actions: [
       Action(
-        time: '23:45:09 05/07/2022',
+        time: '23:45:09, 05/07/2022',
         content: 'Thêm mới bất động sản',
       ),
       Action(
-        time: '11:11:11 05/07/2022',
+        time: '11:11:11, 05/07/2022',
         content: 'Đăng nhập hệ thống',
       ),
     ],
