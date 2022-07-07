@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:luci_test/presenttation/home/bloc/home_cubit.dart';
 import 'package:luci_test/presenttation/home/ui/widget/appbar.dart';
+import 'package:luci_test/presenttation/home/ui/widget/end_drawer.dart';
 import 'package:luci_test/presenttation/home/ui/widget/history.dart';
 import 'package:luci_test/presenttation/home/ui/widget/info.dart';
 import 'package:luci_test/presenttation/home/ui/widget/jobs_and_project.dart';
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   late HomeCubit _cubit;
 
   @override
@@ -22,7 +24,12 @@ class _HomePageState extends State<HomePage> {
     _cubit = context.read<HomeCubit>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _cubit.getInfo();
+      _cubit.getHistory();
     });
+  }
+
+  openDrawer() {
+    _key.currentState!.openEndDrawer();
   }
 
   @override
@@ -30,11 +37,15 @@ class _HomePageState extends State<HomePage> {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (_, state) {
         return Scaffold(
+          key: _key,
           backgroundColor: Colors.white,
+          endDrawer: const EndDrawer(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SAppBar(),
+              SAppBar(
+                onClickMenu: openDrawer,
+              ),
               ..._body(),
             ],
           ),
@@ -76,25 +87,121 @@ class _HomePageState extends State<HomePage> {
         color: Colors.black12,
       ),
       Expanded(
-        child: SingleChildScrollView(
-          child: Row(
-            children: const [
-              Expanded(
-                flex: 1,
-                child: Info(),
-              ),
-              Expanded(
-                flex: 2,
-                child: History(),
-              ),
-              Expanded(
-                flex: 1,
-                child: JobAndProject(),
-              ),
-            ],
-          ),
+        child: LayoutBuilder(
+          builder: (_, __) {
+            if (MediaQuery.of(context).size.width > 1300) {
+              return _web();
+            } else if (MediaQuery.of(context).size.width > 800) {
+              return _mobileLarge();
+            } else {
+              return _mobileSmall();
+            }
+          },
         ),
       ),
     ];
+  }
+
+  _web() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Expanded(
+          flex: 1,
+          child: Info(),
+        ),
+        Container(
+          width: 2,
+          height: double.infinity,
+          color: Colors.black12,
+        ),
+        const Expanded(
+          flex: 2,
+          child: History(),
+        ),
+        Container(
+          width: 2,
+          height: double.infinity,
+          color: Colors.black12,
+        ),
+        const Expanded(
+          flex: 1,
+          child: JobAndProject(),
+        ),
+      ],
+    );
+  }
+
+  _mobileLarge() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            color: const Color(0x468E8E8E),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Expanded(
+                  flex: 1,
+                  child: Info(
+                    isWeb: false,
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: JobAndProject(
+                    isWeb: false,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            height: 2,
+            color: Colors.black12,
+          ),
+          const History(
+            isWeb: false,
+          ),
+        ],
+      ),
+    );
+  }
+
+  _mobileSmall() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            color: const Color(0x468E8E8E),
+            child: Column(
+              children: [
+                const Info(
+                  isWeb: false,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 2,
+                  color: Colors.black12,
+                ),
+                const JobAndProject(
+                  isWeb: false,
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            height: 2,
+            color: Colors.black12,
+          ),
+          const History(
+            isWeb: false,
+          ),
+        ],
+      ),
+    );
   }
 }

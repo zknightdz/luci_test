@@ -1,3 +1,4 @@
+import 'package:luci_test/models/history_item.dart';
 import 'package:luci_test/models/job.dart';
 import 'package:luci_test/models/project.dart';
 import 'package:luci_test/models/user.dart';
@@ -38,3 +39,49 @@ var user = User(
     ),
   ],
 );
+
+var history = [
+  HistoryItem(
+    title: 'Hôm nay, 07/07/2022',
+    actions: [
+      Action(
+        time: '16:30:24 07/07/2022',
+        content: 'Chỉnh sửa thông tin bất động sản',
+      ),
+      Action(
+        time: '15:45:06 07/07/2022',
+        content: 'Chỉnh sửa thông tin bất động sản',
+      ),
+      Action(
+        time: '08:13:04 07/07/2022',
+        content: 'Thêm mới bất động sản',
+      ),
+    ],
+  ),
+  HistoryItem(
+    title: 'Hôm qua, 06/07/2022',
+    actions: [
+      Action(
+        time: '23:45:09 06/07/2022',
+        content: 'Chỉnh sửa thông tin bất động sản',
+      ),
+      Action(
+        time: '11:11:11 06/07/2022',
+        content: 'Thêm mới bất động sản',
+      ),
+    ],
+  ),
+  HistoryItem(
+    title: '05/07/2022',
+    actions: [
+      Action(
+        time: '23:45:09 05/07/2022',
+        content: 'Thêm mới bất động sản',
+      ),
+      Action(
+        time: '11:11:11 05/07/2022',
+        content: 'Đăng nhập hệ thống',
+      ),
+    ],
+  ),
+];
